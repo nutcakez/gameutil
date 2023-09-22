@@ -40,3 +40,11 @@ func MoveToPlayer32(x,y,m,n, speed float32) (float64, float64) {
 func Pow2(x float64) float64 {
 	return math.Pow(x, 2)
 }
+
+func CircleCircleCollision(x,y,radius,m,n,radius2 float64) bool {
+	distance:= Distance(x,y,m,n)
+	if distance < m+n {
+		return true
+	}
+	return false
+}
