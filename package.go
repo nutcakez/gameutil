@@ -32,6 +32,10 @@ func MoveToPlayer(x, y, m, n, speed float64) (float64, float64) {
 	return x + xWithRatio, y + yWithratio
 }
 
+func MoveToPlayer32(x,y,m,n, speed float32) (float64, float64) {
+	return MoveToPlayer(float64(x), float64(y), float64(m), float64(n), float64(speed))
+}
+
 //return square of x
 func Pow2(x float64) float64 {
 	return math.Pow(x, 2)
