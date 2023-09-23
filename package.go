@@ -9,7 +9,7 @@ func Distance(x, y, m, n float64) float64 {
 }
 
 func vectorTo(x, y, m, n float64) (float64, float64) {
-	return x - m, y - n
+	return m - x, n -y 
 }
 
 //x and y for player
@@ -17,22 +17,15 @@ func vectorTo(x, y, m, n float64) (float64, float64) {
 //speed the ammount of pixel to move
 func MoveToPlayer(x, y, m, n, speed float64) (float64, float64) {
 	distance := Distance(x, y, m, n)
-	ratio := speed / distance
 
-	xWithRatio := x / ratio
-	yWithratio := y / ratio
+	b, a := vectorTo(x,y,m,n)
 
-	if x < m {
-		xWithRatio = -xWithRatio
-	}
-	if y < n {
-		yWithratio = -yWithratio
-	}
+	ratio := speed/distance
 
-	return x + xWithRatio, y + yWithratio
+	return x+(a*ratio), y+(b*ratio)
 }
 
-func MoveToPlayer32(x,y,m,n, speed float32) (float64, float64) {
+func MoveToPlayer32(x, y, m, n, speed float32) (float64, float64) {
 	return MoveToPlayer(float64(x), float64(y), float64(m), float64(n), float64(speed))
 }
 
@@ -41,10 +34,15 @@ func Pow2(x float64) float64 {
 	return math.Pow(x, 2)
 }
 
-func CircleCircleCollision(x,y,radius,m,n,radius2 float64) bool {
-	distance:= Distance(x,y,m,n)
-	if distance < m+n {
-		return true
-	}
-	return false
+func CircleCircleCollision(x, y, radius, m, n, radius2 float64) bool {
+	distance := Distance(x, y, m, n)
+	return distance <= m+n
+}
+
+func InvSin(x float64) float64 {
+	return math.Asin(x) * (180 / math.Pi)
+}
+
+func InvCos(x float64) float64 {
+	return math.Acos(x) * (180/math.Pi)
 }
